@@ -1,6 +1,8 @@
 import tkinter
+from tkinter import *
 import customtkinter
 import requests
+from PIL import Image, ImageTk
 
 # System
 customtkinter.set_appearance_mode("dark")
@@ -23,13 +25,32 @@ def function():
         celsius = (temp - 32) * 5/9
 
         label2.configure(text=f"The weather in {user_input} is: {weather}")
-        label3.configure(text=f"The temperature in {user_input} is: {celsius}ºC")
+        label3.configure(text=f"The temperature in {user_input} is: {celsius:.2f}ºC")  # Format the temperature
 
+
+
+#images_function
+        if weather == "Clouds":
+            label4.configure(image=imgcloud, width=500, height=90)
+        elif weather == "Rain":
+            label4.configure(image=imgrain, width=500, height=90)
+        elif weather == "Clear":
+            label4.configure(image=imgclear, width=500, height=90)
+            
 # App
 app = customtkinter.CTk()
 app.geometry("450x480")
 app.title("Weather Checker")
 app.iconbitmap('fav.ico')
+
+# Images
+imgcloud = ImageTk.PhotoImage(Image.open("clouds.png"))
+imgclear = ImageTk.PhotoImage(Image.open("clear.png"))
+imgrain = ImageTk.PhotoImage(Image.open("rain.png"))
+imgdefault = ImageTk.PhotoImage(Image.open("default.png"))
+label4 = Label(image=imgdefault, width=5, height=9)
+label4.pack()
+
 
 # Widgets
 frame = customtkinter.CTkFrame(app)
